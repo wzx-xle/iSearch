@@ -16,10 +16,6 @@
 3. 客户端查询
 4. 支持触发式和增量式建索
 
-## 架构
-1. chrome插件，实现前端的展示
-2. web服务，提供数据存储
-
 ## 版权声明
 iSearch使用 [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.txt) 协议
 
