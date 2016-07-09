@@ -22,6 +22,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import ren.wxyz.isearch.search.SearchService;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,16 +40,23 @@ public class App {
      * @param args 启动参数
      */
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello World!");
-
         File idxDir = new File("D:\\index-data");
         if (!idxDir.exists()) {
             idxDir.mkdirs();
         }
 
-        createIndex(idxDir);
+//        createIndex(idxDir);
 
-        searchIndex(idxDir);
+//        searchIndex(idxDir);
+
+        SearchService.setIndexDirectory(idxDir);
+        SearchService searchService = SearchService.getSingleInstance();
+
+        createIndex(searchService);
+
+        searchIndex(searchService);
+
+        searchService.close();
     }
 
     /**
@@ -76,6 +84,27 @@ public class App {
         idxWriter.addDocument(doc);
 
         idxWriter.close();
+    }
+
+    private static void createIndex(SearchService searchService) throws IOException {
+        Document doc = new Document();
+        doc.add(new TextField("path", "D:\\Workspace\\MyWeb1\\index.html", Field.Store.YES));
+        doc.add(new TextField("content", "<html>index</html>", Field.Store.YES));
+        searchService.updateIndex(doc);
+
+        doc = new Document();
+        doc.add(new TextField("path", "D:\\Workspace\\MyWeb2\\选择模式.html", Field.Store.YES));
+        doc.add(new TextField("content", "<html>选择模式</html>", Field.Store.YES));
+        searchService.updateIndex(doc);
+    }
+
+    private static void searchIndex(SearchService searchService) throws Exception {
+        QueryParser parser = new QueryParser(Version.LUCENE_47, "path", new StandardAnalyzer(Version.LUCENE_47));
+        Query query = parser.parse("myweb1");
+
+        for (Document doc : searchService.search(query, 10)) {
+            System.out.println(doc.get("path") + ": " + doc.get("content"));
+        }
     }
 
     /**
