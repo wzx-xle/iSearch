@@ -34,6 +34,9 @@ import java.util.List;
  */
 public class SearchService {
 
+    /**
+     * 索引存储的目录
+     */
     private static Directory idxDir;
 
     static {
@@ -69,6 +72,21 @@ public class SearchService {
     }
 
     /**
+     * 建索器
+     */
+    private IndexWriter idxWriter;
+    /**
+     * 建索器配置
+     */
+    private IndexWriterConfig iwc;
+
+    /**
+     * 索引读取器
+     */
+    private IndexReader idxReader;
+    private Object idxReaderLock = new Object();
+
+    /**
      * 初始化实例
      */
     public SearchService() {
@@ -76,9 +94,6 @@ public class SearchService {
         this.iwc = new IndexWriterConfig(Version.LUCENE_47, new StandardAnalyzer(Version.LUCENE_47));
         this.iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
     }
-
-    private IndexWriter idxWriter;
-    private IndexWriterConfig iwc;
 
     /**
      * 更新索引
@@ -111,9 +126,6 @@ public class SearchService {
         }
         idxWriter.commit();
     }
-
-    private IndexReader idxReader;
-    private Object idxReaderLock = new Object();
 
     /**
      * 检索
