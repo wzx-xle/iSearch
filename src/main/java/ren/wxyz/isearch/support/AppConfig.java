@@ -4,7 +4,7 @@ package ren.wxyz.isearch.support;
  * 应用程序配置
  *
  * @author wxyz
- * @since 1.0.0
+ * @since 0.0.2
  */
 public class AppConfig {
     /**

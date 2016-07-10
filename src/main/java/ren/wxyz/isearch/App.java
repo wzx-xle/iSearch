@@ -90,12 +90,12 @@ public class App {
         Document doc = new Document();
         doc.add(new TextField("path", "D:\\Workspace\\MyWeb1\\index.html", Field.Store.YES));
         doc.add(new TextField("content", "<html>index</html>", Field.Store.YES));
-        searchService.updateIndex(doc);
+        searchService.addDocument(doc);
 
         doc = new Document();
         doc.add(new TextField("path", "D:\\Workspace\\MyWeb2\\选择模式.html", Field.Store.YES));
         doc.add(new TextField("content", "<html>选择模式</html>", Field.Store.YES));
-        searchService.updateIndex(doc);
+        searchService.addDocument(doc);
     }
 
     private static void searchIndex(SearchService searchService) throws Exception {

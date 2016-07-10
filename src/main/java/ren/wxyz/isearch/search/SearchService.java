@@ -101,7 +101,7 @@ public class SearchService {
      * @param doc 添加到索引的文档
      * @throws IOException
      */
-    public synchronized void updateIndex(Document doc) throws IOException {
+    public synchronized void addDocument(Document doc) throws IOException {
         if (this.idxWriter == null) {
             // 创建建索器
             idxWriter = new IndexWriter(this.idxDir, iwc);
@@ -116,7 +116,7 @@ public class SearchService {
      * @param docs 批量添加到索引的文档
      * @throws IOException
      */
-    public synchronized void updateIndex(List<Document> docs) throws IOException {
+    public synchronized void addDocuments(List<Document> docs) throws IOException {
         if (this.idxWriter == null) {
             // 创建建索器
             idxWriter = new IndexWriter(this.idxDir, iwc);
