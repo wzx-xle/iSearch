@@ -40,6 +40,10 @@
 
 		<junit.version>4.12</junit.version>
 		<lucene.version>4.7.2</lucene.version>
+
+		<lombok.version>1.16.6</lombok.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
 	</properties>
 
 	<dependencies>
@@ -50,7 +54,7 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- unit stop -->
+		<!-- unit end -->
 
 		<!-- lucence start -->
 		<dependency>
@@ -68,7 +72,7 @@
 			<artifactId>lucene-queryparser</artifactId>
 			<version>${lucene.version}</version>
 		</dependency>
-		<!-- lucence stop -->
+		<!-- lucence end -->
 
 		<!-- apache commons start -->
 		<dependency>
@@ -82,7 +86,35 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-		<!-- apache commons stop -->
+		<!-- apache commons end -->
+
+		<!-- lombok start -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- lombok end -->
+
+		<!-- logger start -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- logger end -->
+
 	</dependencies>
 
 	<build>
