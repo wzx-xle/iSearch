@@ -27,7 +27,7 @@ import java.util.List;
  * @since 0.0.2
  */
 @Slf4j
-public class LucenceIndex {
+public class LuceneIndex {
 
     /**
      * 建索器
@@ -43,7 +43,7 @@ public class LucenceIndex {
      * 创建一个索引
      * @param idxStoreDir 索引存储目录
      */
-    public LucenceIndex(File idxStoreDir) throws IOException {
+    public LuceneIndex(File idxStoreDir) throws IOException {
         if (!idxStoreDir.exists()) {
             idxStoreDir.mkdirs();
         }
