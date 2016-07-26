@@ -108,7 +108,7 @@ public class LucenceIndex {
      * @param topN 前N条
      * @throws Exception
      */
-    public List<Document> search(Query query, int topN) throws Exception {
+    public List<Document> search(Query query, int topN) throws IOException {
         // 查询
         TopDocs td = idxSearcher.search(query, topN);
 
@@ -119,6 +119,15 @@ public class LucenceIndex {
         }
 
         return docs;
+    }
+
+    /**
+     * 删除文档
+     *
+     * @param queries 查询器
+     */
+    public void deleteDocuments(Query... queries) throws IOException {
+        idxWriter.deleteDocuments(queries);
     }
 
     /**
