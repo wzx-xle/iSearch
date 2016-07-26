@@ -41,7 +41,7 @@ public class SearchService {
 
     static {
         // 设置默认目录
-        File defaultIndexDirectory = new File(AppConfig.DEFAULT_INDEX_DIRETORY);
+        File defaultIndexDirectory = new File(AppConfig.DEFAULT_INDEX_STORE_DIRETORY);
         if (!defaultIndexDirectory.exists()) {
             defaultIndexDirectory.mkdirs();
         }
