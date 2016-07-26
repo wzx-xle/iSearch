@@ -9,7 +9,7 @@
 
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>对本地文档进行全文建索，并提供全文查询接口</description>
-	<url>http://git.oschina.net/hyhjwzx/iSearch</url>
+	<url>https://github.com/wzx-xle/iSearch</url>
 
 	<licenses>
 		<license>
@@ -28,9 +28,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:https://git.oschina.net/hyhjwzx/iSearch.git</connection>
-		<developerConnection>scm:https://git.oschina.net/hyhjwzx/iSearch.git</developerConnection>
-		<url>https://git.oschina.net/hyhjwzx/iSearch.git</url>
+		<connection>scm:https://github.com/wzx-xle/iSearch.git</connection>
+		<developerConnection>scm:https://github.com/wzx-xle/iSearch.git</developerConnection>
+		<url>https://github.com/wzx-xle/iSearch.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
