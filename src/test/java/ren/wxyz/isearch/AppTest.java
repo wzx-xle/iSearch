@@ -1,38 +1,42 @@
+/**
+ * Copyright (C) 2001-2016 wxyz <hyhjwzx@126.com>
+ * <p/>
+ * This program can be distributed under the terms of the GNU GPL Version 2.
+ * See the file LICENSE.
+ */
 package ren.wxyz.isearch;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
- * Unit test for simple App.
+ * 测试启动类
+ *
+ * @auther wxyz 2016-08-25_19:58
+ * @since 0.1
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+public class AppTest {
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+    @Test
+    public void testMain() throws Exception {
+        App.main(new String[]{
+        });
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+        App.main(new String[]{
+                "-h"
+        });
+
+        App.main(new String[]{
+                "--help"
+        });
+
+        App.main(new String[]{
+                "-v"
+        });
+
+        App.main(new String[]{
+                "--version"
+        });
     }
 }
