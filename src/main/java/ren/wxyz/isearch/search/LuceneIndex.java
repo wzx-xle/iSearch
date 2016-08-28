@@ -1,6 +1,7 @@
 package ren.wxyz.isearch.search;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -30,6 +31,11 @@ import java.util.List;
 public class LuceneIndex {
 
     /**
+     * 索引存储目录
+     */
+    private Directory idxStoreDir;
+
+    /**
      * 建索器
      */
     private IndexWriter idxWriter;
@@ -48,33 +54,28 @@ public class LuceneIndex {
             idxStoreDir.mkdirs();
         }
 
-        init(idxStoreDir);
+        this.idxStoreDir = FSDirectory.open(idxStoreDir);
     }
 
     /**
-     * 初始化写索引器和读索引器
+     * 打开一个写索引器
      *
-     * @param idxStorePath 索引存储目录
+     * @param matchVersion Lucene版本
+     * @param analyzer 分词器
+     * @throws IOException
      */
-    private void init(File idxStorePath) throws IOException {
-        try {
-            // 打开目录
-            Directory idxStoreDir = FSDirectory.open(idxStorePath);
+    public void openWriter(Version matchVersion, Analyzer analyzer) throws IOException {
+        IndexWriterConfig iwc = new IndexWriterConfig(matchVersion, analyzer);
+        iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+        this.idxWriter = new IndexWriter(idxStoreDir, iwc);
+    }
 
-            // 写索引器
-            IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_47, new StandardAnalyzer(Version.LUCENE_47));
-            iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-            this.idxWriter = new IndexWriter(idxStoreDir, iwc);
-
-            // 读索引器
-            IndexReader idxReader = DirectoryReader.open(idxStoreDir);
-            this.idxSearcher = new IndexSearcher(idxReader);
-        }
-        catch (IOException e) {
-            close();
-            log.warn("索引目录[{}]打开失败！MSG: {}", idxStorePath, e.getMessage(), e);
-            throw e;
-        }
+    /**
+     * 打开一个读索引器
+     */
+    public void openSearcher() throws IOException {
+        IndexReader idxReader = DirectoryReader.open(idxStoreDir);
+        this.idxSearcher = new IndexSearcher(idxReader);
     }
 
     /**
@@ -125,17 +126,27 @@ public class LuceneIndex {
      * 删除文档
      *
      * @param queries 查询器
+     * @throws IOException
      */
     public void deleteDocuments(Query... queries) throws IOException {
         idxWriter.deleteDocuments(queries);
     }
 
     /**
+     * 删除所有文档
+     *
+     * @throws IOException
+     */
+    public void deleteAll() throws IOException {
+        idxWriter.deleteAll();
+    }
+
+    /**
      * 关闭服务
      */
-    public synchronized void close() throws IOException {
-        if (this.idxWriter != null) {
-            this.idxWriter.close();
+    public void closeWriter() throws IOException {
+        if (null != this.idxWriter) {
+            this.idxWriter.close(true);
         }
     }
 }
