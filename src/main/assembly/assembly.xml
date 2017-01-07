@@ -29,7 +29,7 @@
             <directory>src/main/resources</directory>
             <outputDirectory>/conf</outputDirectory>
             <includes>
-                <include>isearch.conf</include>
+                <include>isearch.properties</include>
                 <include>log4j.properties</include>
             </includes>
         </fileSet>
