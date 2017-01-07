@@ -50,7 +50,7 @@ public class AppConfig {
      * 初始化参数
      */
     private AppConfig() {
-        Properties props = readProperties("/isearch.conf");
+        Properties props = readProperties("/isearch.properties");
 
         this.indexStoreDirectory = props.getProperty("index.store", DEFAULT_INDEX_STORE_DIRETORY);
     }
