@@ -36,5 +36,5 @@ public abstract class AbstractUI {
     /**
      * 启动UI
      */
-    public abstract void start();
+    protected abstract void start();
 }

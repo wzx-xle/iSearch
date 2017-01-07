@@ -15,7 +15,7 @@ package ren.wxyz.isearch.ui;
 public class ShellUI extends AbstractUI {
 
     @Override
-    public void start() {
+    protected void start() {
 
     }
 
